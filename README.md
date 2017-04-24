@@ -1,6 +1,7 @@
 # angular-component-test-object
 A test module that offers page objects for Angular components.
 
+## Example unit test (app.spec.ts)
 ```
 import { async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
