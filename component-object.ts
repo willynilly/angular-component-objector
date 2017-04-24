@@ -6,31 +6,35 @@ export class ComponentObject {
   controller: any;
   compiled: any;
 
-    constructor(testComponentClass, declarations, providers=[]) {
+  constructor(testComponentClass, declarations, providers = []) {
 
-      TestBed.configureTestingModule({
-        declarations: declarations,
-        providers: providers
-      }).compileComponents().then(() => {
-        this.fixture = TestBed.createComponent(testComponentClass);
-        this.controller = this.fixture.debugElement.componentInstance;
-        this.fixture.detectChanges();
-        this.compiled = this.fixture.debugElement.nativeElement;
-      })
+    TestBed.configureTestingModule({
+      declarations: declarations,
+      providers: providers
+    }).compileComponents().then(() => {
+      this.fixture = TestBed.createComponent(testComponentClass);
+      this.controller = this.fixture.debugElement.componentInstance;
+      this.detectChanges();
+      this.compiled = this.fixture.debugElement.nativeElement;
+    })
 
-    }
+  }
 
-    getElementText(cssSelector) {
-       return this.compiled.querySelector(cssSelector).textContent;
-    }
+  getElementText(cssSelector) {
+    return this.compiled.querySelector(cssSelector).textContent.trim();
+  }
 
-    getElementTexts(cssSelector) {
-      return [].map.call(this.compiled.querySelectorAll(cssSelector), (node) => {
-        return node.textContent;
-      });
-    }
+  getElementTexts(cssSelector) {
+    return [].map.call(this.compiled.querySelectorAll(cssSelector), (node) => {
+      return node.textContent.trim();
+    });
+  }
 
-    hasElement(cssSelector) {
-      return this.compiled.querySelector(cssSelector) !== null;
-    }
+  hasElement(cssSelector) {
+    return this.compiled.querySelector(cssSelector) !== null;
+  }
+
+  detectChanges(): void {
+    this.fixture.detectChanges();
+  }
 }
